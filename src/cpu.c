@@ -12,6 +12,7 @@ void setup(struct CPU *cpu) {
     cpu->DT = 0;
     cpu->ST = 0;
     cpu->SP = 0;
+    cpu->PC = 0x200;
 }
 
 
