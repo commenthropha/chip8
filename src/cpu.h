@@ -8,4 +8,5 @@ struct CPU {
     int DT; // Delay Timer
     int ST; // Sound Timer
     int SP; // Stack Pointer
+    int PC; // Program Counter
 };
