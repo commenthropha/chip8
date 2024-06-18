@@ -5,6 +5,9 @@
 #define WINDOW_HEIGHT 320
 #define WINDOW_WIDTH 600
 
+#define SCREEN_HEIGHT 32
+#define SCREEN_WIDTH 64
+
 int intitialise_screen(SDL_Renderer *renderer, SDL_Window *window, SDL_Texture *screen);
 
 #endif
