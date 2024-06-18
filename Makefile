@@ -8,7 +8,7 @@ CFLAGS = -Wall -Wextra
 TARGET = cpu
 
 # Defining the source files
-SRCS = src/cpu.c
+SRCS = src/cpu.c src/screen.c
 
 # Defining the object files
 OBJS = $(SRCS:.c=.o)
