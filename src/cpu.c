@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "cpu.h"
-
+#include <SDL2/SDL.h>
 
 void setup(struct CPU *cpu) {
     cpu->memory = (uint8_t *)malloc(4096 * sizeof(uint8_t));
