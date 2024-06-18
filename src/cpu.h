@@ -1,3 +1,5 @@
+#ifndef CPU_H
+#define CPU_H
 #include <stdint.h>
 
 struct CPU {
@@ -30,3 +32,5 @@ uint8_t font[80] =
 	0xF0, 0x80, 0xF0, 0x80, 0xF0, // E
 	0xF0, 0x80, 0xF0, 0x80, 0x80  // F
 };
+
+#endif
