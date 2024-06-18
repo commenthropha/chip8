@@ -42,14 +42,12 @@ void load(struct CPU *cpu, uint8_t *program, int size) {
 
 
 void cycle(struct CPU *cpu) {
-    uint16_t cur_inst = cpu->memory[cpu->PC] << 8 | cpu->memory[cpu->PC + 1];
-
-    uint8_t opcode=(cur_inst & 0xF000) >> 12;
-    uint8_t reg_1=(cur_inst & 0x0F00) >> 8;
-    uint8_t reg_2=(cur_inst & 0x00F0) >> 4;
-    uint8_t num_4_bit=(cur_inst & 0x000F);
-    uint8_t num_8_bit=(cur_inst & 0x00FF); 
-    uint8_t im_address = (cur_inst & 0x0FFF);
+    uint16_t opcode = cpu->memory[cpu->PC] << 8 | cpu->memory[cpu->PC + 1];
+    uint8_t reg_1=(opcode & 0x0F00) >> 8;
+    uint8_t reg_2=(opcode & 0x00F0) >> 4;
+    uint8_t num_4_bit=(opcode & 0x000F);
+    uint8_t num_8_bit=(opcode & 0x00FF); 
+    uint8_t im_address = (opcode & 0x0FFF);
 }
 
 
