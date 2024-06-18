@@ -1,5 +1,8 @@
 #include "screen.h"
 
+/*
+ * Initialises the CHIP-8 screen using SDL2
+ */
 void intitialise_screen(SDL_Renderer *renderer, SDL_Window *window, SDL_Texture *texture) {
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
