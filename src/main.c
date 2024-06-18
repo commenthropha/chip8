@@ -7,7 +7,8 @@ int main() {
     SDL_Renderer *chip8_renderer;
     SDL_Texture *chip8_texture;
 
-    setup(&cpu);
+    intitialise_screen(chip8_renderer, chip8_screen, chip8_texture);
+    initialise_cpu(&cpu);
 
     free(cpu.memory);
     free(cpu.registers);
