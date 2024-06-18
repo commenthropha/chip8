@@ -3,6 +3,9 @@
 
 int main() {
     struct CPU cpu;
+    SDL_Window *chip8_screen;
+    SDL_Renderer *chip8_renderer;
+    SDL_Texture *chip8_texture;
 
     setup(&cpu);
 
