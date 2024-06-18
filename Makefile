@@ -5,7 +5,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra
 
 # Defining the target executable
-TARGET = cpu
+TARGET = chip8
 
 # Defining the source files
 SRCS = src/cpu.c src/screen.c src/main.c
