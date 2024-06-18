@@ -23,15 +23,12 @@ void load(struct CPU *cpu, uint8_t *program, int size) {
 }
 
 
-
-
-
-
-
 /*
-    CHIP-8 instructions are divided into broad categories by the first “nibble”, or “half-byte”, which is the first hexadecimal number.
-    Although every instruction will have a first nibble that tells you what kind of instruction it is, 
-    the rest of the nibbles will have different meanings. 
+    CHIP-8 instructions are divided into broad categories by the first “nibble”, or 
+    “half-byte”,  which is the first hexadecimal number.
+    
+    Although every instruction will have a first nibble that tells you what kind of
+    instruction it is, the rest of the nibbles will have different meanings. 
     
     X: The second nibble. Used to look up one of the 16 registers (VX) from V0 through VF.
     Y: The third nibble. Also used to look up one of the 16 registers (VY) from V0 through VF.
@@ -39,8 +36,8 @@ void load(struct CPU *cpu, uint8_t *program, int size) {
     NN: The second byte (third and fourth nibbles). An 8-bit immediate number.
     NNN: The second, third and fourth nibbles. A 12-bit immediate memory addr
 
-    Until the so called 'opcode' is checked, there is no way of telling how each nibble is meant to be interpreted.
-    
+    Until the so called 'opcode' is checked, there is no way of telling how each nibble
+    is meant to be interpreted.
 */
 
 
