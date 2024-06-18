@@ -3,11 +3,11 @@
 
 int main() {
     struct CPU cpu;
-    SDL_Window *chip8_screen = NULL;
-    SDL_Renderer *chip8_renderer = NULL;
-    SDL_Texture *chip8_texture = NULL;
+    SDL_Window *window = NULL;
+    SDL_Renderer *renderer = NULL;
+    SDL_Texture *texture = NULL;
 
-    intitialise_screen(chip8_renderer, chip8_screen, chip8_texture);
+    intitialise_screen(window, renderer, texture);
     initialise_cpu(&cpu);
 
     free(cpu.memory);
