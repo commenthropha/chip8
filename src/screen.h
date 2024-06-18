@@ -2,8 +2,8 @@
 #define SCREEN_H
 #include <SDL2/SDL.h>
 
+#define WINDOW_WIDTH 640
 #define WINDOW_HEIGHT 320
-#define WINDOW_WIDTH 600
 
 #define SCREEN_HEIGHT 32
 #define SCREEN_WIDTH 64
