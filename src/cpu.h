@@ -33,4 +33,8 @@ uint8_t font[80] =
 	0xF0, 0x80, 0xF0, 0x80, 0x80  // F
 };
 
+void initialise_cpu(struct CPU *cpu);
+void load(struct CPU *cpu, uint8_t *program, int size);
+void cycle(struct CPU *cpu);
+
 #endif
