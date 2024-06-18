@@ -44,6 +44,8 @@ void load(struct CPU *cpu, uint8_t *program, int size) {
     Until the so called 'opcode' is checked, there is no way of telling how each nibble
     is meant to be interpreted.
 */
+
+/*
 void cycle(struct CPU *cpu) {
     uint16_t opcode = cpu->memory[cpu->PC] << 8 | cpu->memory[cpu->PC + 1];
     uint8_t reg_1=(opcode & 0x0F00) >> 8;
@@ -52,15 +54,4 @@ void cycle(struct CPU *cpu) {
     uint8_t num_8_bit=(opcode & 0x00FF); 
     uint8_t im_address = (opcode & 0x0FFF);
 }
-
-int main() {
-    struct CPU cpu;
-
-    setup(&cpu);
-
-    free(cpu.memory);
-    free(cpu.registers);
-    free(cpu.stack);
-
-    return 0;
-}
+*/
