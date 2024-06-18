@@ -15,7 +15,7 @@ OBJS = $(SRCS:.c=.o)
 
 # Rule to build the target executable
 $(TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS) -lSDL2
 
 # Rule to build object files from source files
 %.o: %.c
