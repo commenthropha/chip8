@@ -3,7 +3,7 @@
 /*
  * Initialises the CHIP-8 screen using SDL2
  */
-void intitialise_screen(SDL_Renderer *renderer, SDL_Window *window, SDL_Texture *texture) {
+void intitialise_screen(SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture) {
     if(SDL_Init(SDL_INIT_EVERYTHING) < 0)
     {
         fprintf(stderr, "\e[0;31mFailed to initialise the SDL2 library\e[0m: %s", SDL_GetError());
