@@ -7,7 +7,7 @@
 /*
  * Initialises the CHIP-8 CPU
  */ 
-void setup(struct CPU *cpu) {
+void initialise_cpu(struct CPU *cpu) {
     cpu->memory = (uint8_t *)malloc(4096 * sizeof(uint8_t));
     cpu->registers = (uint8_t *)malloc(16 * sizeof(uint8_t));
     cpu->stack = (uint8_t *)malloc(16 * sizeof(uint8_t)); 
