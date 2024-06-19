@@ -47,6 +47,8 @@ void load(struct CPU *cpu, uint8_t *program, int size) {
 
 
 void cycle(struct CPU *cpu, SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture) {
+
+    // Fetch the current instruction
     uint16_t current_instruction = cpu->memory[cpu->PC]| cpu->memory[cpu->PC + 2];
 
     // opcode
@@ -74,14 +76,20 @@ void cycle(struct CPU *cpu, SDL_Window *window, SDL_Renderer *renderer, SDL_Text
     // ANNN set I to NNN
     // DXYN draw sprite at (VX, VY) with width 8 and height N
 
-    switch (opcode){
-        // Clear the screen
-        case 0x00E0:
-            
-            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-            SDL_RenderClear(renderer);
-            SDL_RenderPresent(renderer);
+    switch (opcode) {
+        case 0x0:
+            switch (num_8_bit) {
+                // 00E0 clear the screen
+                case 0xE0:
+                    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+                    SDL_RenderClear(renderer);
+                    SDL_RenderPresent(renderer);
+                    break;
+            }
             break;
+            break;
+    }
+        
 
-}}
+}
 
