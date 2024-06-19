@@ -45,8 +45,8 @@ void load(struct CPU *cpu, uint8_t *program, int size) {
     is meant to be interpreted.
 */
 
-/*
-void cycle(struct CPU *cpu) {
+
+void cycle(struct CPU *cpu, SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture) {
     uint16_t opcode = cpu->memory[cpu->PC] << 8 | cpu->memory[cpu->PC + 1];
     uint8_t reg_1=(opcode & 0x0F00) >> 8;
     uint8_t reg_2=(opcode & 0x00F0) >> 4;
@@ -54,4 +54,4 @@ void cycle(struct CPU *cpu) {
     uint8_t num_8_bit=(opcode & 0x00FF); 
     uint8_t im_address = (opcode & 0x0FFF);
 }
-*/
+

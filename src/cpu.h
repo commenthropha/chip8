@@ -35,6 +35,6 @@ static uint8_t FONTSET[80] =
 
 void initialise_cpu(struct CPU *cpu);
 void load(struct CPU *cpu, uint8_t *program, int size);
-void cycle(struct CPU *cpu);
+void cycle(struct CPU *cpu, SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture);
 
 #endif
