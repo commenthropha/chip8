@@ -53,5 +53,23 @@ void cycle(struct CPU *cpu, SDL_Window *window, SDL_Renderer *renderer, SDL_Text
     uint8_t num_4_bit=(opcode & 0x000F);
     uint8_t num_8_bit=(opcode & 0x00FF); 
     uint8_t im_address = (opcode & 0x0FFF);
+
+
+    // 00E0 - Clear display
+    // 1NNN - Jump
+    // 6XNN set register X to NN
+    // 7XNN add NN to register X
+    // ANNN set I to NNN
+    // DXYN draw sprite at (VX, VY) with width 8 and height N
+
+    switch (opcode){
+        // Clear the screen
+        case 0x00E0:
+            
+            SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+            SDL_RenderClear(renderer);
+            SDL_RenderPresent(renderer);
+            break;
+
 }
 
