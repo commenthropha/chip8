@@ -92,6 +92,11 @@ void cycle(struct CPU *cpu, SDL_Window *window, SDL_Renderer *renderer, SDL_Text
         case 0x1:
             cpu->PC = im_address;
             break;
+    
+        // 6XNN set register X to NN
+        case 0x6:
+            cpu->registers[reg_1] = num_8_bit;
+            break;
             break;
     }
         
