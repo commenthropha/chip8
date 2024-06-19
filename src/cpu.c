@@ -87,6 +87,11 @@ void cycle(struct CPU *cpu, SDL_Window *window, SDL_Renderer *renderer, SDL_Text
                     break;
             }
             break;
+        
+        // 1NNN jump to address NNN
+        case 0x1:
+            cpu->PC = im_address;
+            break;
             break;
     }
         
