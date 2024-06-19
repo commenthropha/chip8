@@ -47,7 +47,7 @@ void load(struct CPU *cpu, uint8_t *program, int size) {
 
 
 void cycle(struct CPU *cpu, SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture) {
-    uint16_t opcode = cpu->memory[cpu->PC] << 8 | cpu->memory[cpu->PC + 1];
+    uint16_t opcode = cpu->memory[cpu->PC] << 8 | cpu->memory[cpu->PC + 2];
     uint8_t reg_1=(opcode & 0x0F00) >> 8;
     uint8_t reg_2=(opcode & 0x00F0) >> 4;
     uint8_t num_4_bit=(opcode & 0x000F);
