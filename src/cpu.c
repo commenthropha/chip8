@@ -47,16 +47,28 @@ void load(struct CPU *cpu, uint8_t *program, int size) {
 
 
 void cycle(struct CPU *cpu, SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture) {
-    uint16_t opcode = cpu->memory[cpu->PC] << 8 | cpu->memory[cpu->PC + 2];
-    uint8_t reg_1=(opcode & 0x0F00) >> 8;
-    uint8_t reg_2=(opcode & 0x00F0) >> 4;
-    uint8_t num_4_bit=(opcode & 0x000F);
-    uint8_t num_8_bit=(opcode & 0x00FF); 
-    uint8_t im_address = (opcode & 0x0FFF);
+    uint16_t current_instruction = cpu->memory[cpu->PC]| cpu->memory[cpu->PC + 2];
+
+    // opcode
+    uint8_t opcode = (current_instruction & 0xF000) >> 12;
+
+    // register address 1
+    uint8_t reg_1=(current_instruction & 0x0F00) >> 8;
 
 
-    // 00E0 - Clear display
-    // 1NNN - Jump
+    // register address 2
+    uint8_t reg_2=(current_instruction & 0x00F0) >> 4;
+
+    // 4 bit number
+    uint8_t num_4_bit=(current_instruction & 0x000F);
+
+    // 8 bit immediate number
+    uint8_t num_8_bit=(current_instruction & 0x00FF); 
+
+    // 12 bit immediate address
+    uint16_t im_address = (current_instruction & 0x0FFF);
+
+
     // 6XNN set register X to NN
     // 7XNN add NN to register X
     // ANNN set I to NNN
@@ -71,5 +83,5 @@ void cycle(struct CPU *cpu, SDL_Window *window, SDL_Renderer *renderer, SDL_Text
             SDL_RenderPresent(renderer);
             break;
 
-}
+}}
 
