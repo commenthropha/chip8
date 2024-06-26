@@ -49,7 +49,7 @@ void load(struct CPU *cpu, uint8_t *program, int size) {
 */
 
 
-void cycle(struct CPU *cpu, SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture) {
+void cycle(struct CPU *cpu, SDL_Renderer *renderer) {
 
     // Fetch the current instruction
     uint16_t current_instruction = cpu->memory[cpu->PC]| cpu->memory[cpu->PC + 2];
@@ -110,14 +110,26 @@ void cycle(struct CPU *cpu, SDL_Window *window, SDL_Renderer *renderer, SDL_Text
             cpu->I = im_address;
             break;
         case 0xD:
-            // Draw, has to be implemented
+            // DXYN draw sprite stored at I at X,Y onto buffer
             uint8_t x = cpu->registers[reg_1] & 63;
             uint8_t y = cpu->registers[reg_2] & 31;
             uint8_t height = num_4_bit;
             cpu->registers[0xF] = 0;
             for (int row=0; row<height; row++){
-                // fill in here - not sure how to draw to SDL.
-                // SDL draw point?
+                uint8_t sprite_row = cpu->memory[cpu->I + row];
+                for (int col=0; col<8; col++){
+                    // get pixel from sprite byte with &, for each column
+                    uint8_t pixel = sprite_row & (0x80 >> col); 
+                    if (pixel){
+                        if (cpu->screen[y + row][x + col]){
+                            cpu->registers[0xF] = 1;
+                        }
+                        // create buffer to draw to screen
+                        if (x + col < 64 && y + row < 32){
+                        cpu->screen[(y + row)*32+x + col] ^= 1;
+                        }
+                    }
+                }
             }
             break;
     }
