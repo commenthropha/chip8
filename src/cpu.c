@@ -10,12 +10,15 @@
 void initialise_cpu(struct CPU *cpu) {
     cpu->memory = (uint8_t *)malloc(4096 * sizeof(uint8_t));
     cpu->registers = (uint8_t *)malloc(16 * sizeof(uint8_t));
-    cpu->stack = (uint8_t *)malloc(16 * sizeof(uint8_t)); 
+    cpu->stack = (uint8_t *)malloc(16 * sizeof(uint8_t));
+    // screen size is 64x32
+    cpu ->screen = (uint8_t *)malloc(64 * 32 * sizeof(uint8_t)); 
     cpu->I = 0;
     cpu->DT = 0;
     cpu->ST = 0;
     cpu->SP = 0;
     cpu->PC = 0x200;
+    
 }
 
 /*
