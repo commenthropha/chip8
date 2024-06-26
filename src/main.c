@@ -10,6 +10,9 @@ int main() {
     intitialise_screen(window, renderer, texture);
     initialise_cpu(&cpu);
 
+
+   
+
     free(cpu.memory);
     free(cpu.registers);
     free(cpu.stack);

@@ -33,7 +33,26 @@ void intitialise_screen(SDL_Window *window, SDL_Renderer *renderer, SDL_Texture 
         exit(1);
     }
 
+    
+    
+
 	SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
 	SDL_RenderClear(renderer);	
     SDL_RenderPresent(renderer);
+
+    // Test code below - feel free to remove.
+    SDL_Rect rect;
+    rect.x = 0;
+    rect.y = 0;
+    rect.w = 30;
+    rect.h = 30;
+    
+    SDL_SetRenderDrawColor(renderer, 25, 205, 255, 255);
+    SDL_RenderDrawRect(renderer, &rect);
+
+    SDL_RenderDrawPoint(renderer, 10, 10);
+    SDL_RenderPresent(renderer);
+    SDL_Delay(5000);
+
+   
 }

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdint.h>
 #include "cpu.h"
-#include <SDL2/SDL.h>
+//#include <SDL2/SDL.h>
 
 /*
  * Initialises the CHIP-8 CPU
@@ -106,6 +106,16 @@ void cycle(struct CPU *cpu, SDL_Window *window, SDL_Renderer *renderer, SDL_Text
             // Set I to NNN
             cpu->I = im_address;
             break;
+        case 0xD:
+            // Draw, has to be implemented
+            uint8_t x = cpu->registers[reg_1] & 63;
+            uint8_t y = cpu->registers[reg_2] & 31;
+            uint8_t height = num_4_bit;
+            cpu->registers[0xF] = 0;
+            for (int row=0; row<height; row++){
+                // fill in here - not sure how to draw to SDL.
+                // SDL draw point?
+            }
             break;
     }
         

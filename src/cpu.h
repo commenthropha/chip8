@@ -1,7 +1,7 @@
 #ifndef CPU_H
 #define CPU_H
 #include <stdint.h>
-
+#include <SDL2/SDL.h>
 struct CPU {
     uint8_t *memory;
     uint8_t *registers;
