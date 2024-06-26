@@ -3,15 +3,13 @@
 
 int main() {
     struct CPU cpu;
-    SDL_Window *window = NULL;
-    SDL_Renderer *renderer = NULL;
-    SDL_Texture *texture = NULL;
+    SDL_Window *window;
+    SDL_Renderer *renderer;
+    SDL_Texture *texture;
 
-    intitialise_screen(window, renderer, texture);
+    initialise_screen(&window, &renderer, &texture);
+    draw_test(window, renderer, texture);
     initialise_cpu(&cpu);
-
-
-   
 
     free(cpu.memory);
     free(cpu.registers);

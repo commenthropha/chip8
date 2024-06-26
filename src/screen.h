@@ -8,6 +8,7 @@
 #define SCREEN_HEIGHT 32
 #define SCREEN_WIDTH 64
 
-void intitialise_screen(SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *screen);
+void initialise_screen(SDL_Window **window, SDL_Renderer **renderer, SDL_Texture **texture);
+void draw_test(SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture) ;
 
 #endif
