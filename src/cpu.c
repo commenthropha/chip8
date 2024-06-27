@@ -49,7 +49,7 @@ void load(struct CPU *cpu, uint8_t *program, int size) {
 */
 
 
-void cycle(struct CPU *cpu, SDL_Renderer *renderer) {
+void cycle(struct CPU *cpu) {
 
     // Fetch the current instruction
     uint16_t current_instruction = cpu->memory[cpu->PC]| cpu->memory[cpu->PC + 2];
@@ -84,9 +84,9 @@ void cycle(struct CPU *cpu, SDL_Renderer *renderer) {
             switch (num_8_bit) {
                 // 00E0 clear the screen
                 case 0xE0:
-                    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-                    SDL_RenderClear(renderer);
-                    SDL_RenderPresent(renderer);
+                    for (int i = 0; i < 64 * 32; i++) {
+                        cpu->screen[i] = 0;
+                    }
                     break;
             }
             break;
@@ -126,6 +126,7 @@ void cycle(struct CPU *cpu, SDL_Renderer *renderer) {
                         }
                         // create buffer to draw to screen
                         if (x + col < 64 && y + row < 32){
+                        // pixels on screen are flipped if 1 present in sprite byte
                         cpu->screen[(y + row)*32+x + col] ^= 1;
                         }
                     }
