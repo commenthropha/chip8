@@ -105,12 +105,14 @@ void cycle(struct CPU *cpu) {
         case 0x7:
             cpu->registers[reg_1] += num_8_bit;
             break;
+
+        // ANNN Set I to NNN
         case 0xA:
-            // Set I to NNN
             cpu->I = im_address;
             break;
+
+        // DXYN draw sprite stored at I at X,Y onto buffer
         case 0xD:
-            // DXYN draw sprite stored at I at X,Y onto buffer
             uint8_t x = cpu->registers[reg_1] & 63;
             uint8_t y = cpu->registers[reg_2] & 31;
             uint8_t height = num_4_bit;
