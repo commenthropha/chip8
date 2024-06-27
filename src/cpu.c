@@ -88,6 +88,11 @@ void cycle(struct CPU *cpu) {
                         cpu->screen[i] = 0;
                     }
                     break;
+                // 00EE return from subroutine
+                case 0xEE:
+                    cpu->SP--;
+                    cpu->PC = cpu->stack[cpu->SP];
+                    break;
             }
             break;
         
@@ -103,6 +108,7 @@ void cycle(struct CPU *cpu) {
             cpu->PC = im_address;
             break;
         
+
         // 6XNN set register X to NN
         case 0x6:
             cpu->registers[reg_1] = num_8_bit;
