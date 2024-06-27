@@ -96,6 +96,13 @@ void cycle(struct CPU *cpu) {
             cpu->PC = im_address;
             break;
     
+        // 2NNN call subroutine at NNN
+        case 0x2:
+            cpu->stack[cpu->SP] = cpu->PC;
+            cpu->SP++;
+            cpu->PC = im_address;
+            break;
+        
         // 6XNN set register X to NN
         case 0x6:
             cpu->registers[reg_1] = num_8_bit;
