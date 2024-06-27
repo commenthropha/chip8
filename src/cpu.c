@@ -52,9 +52,8 @@ void load(struct CPU *cpu, uint8_t *program, int size) {
 void cycle(struct CPU *cpu) {
 
     // Fetch the current instruction
-    uint16_t current_instruction = cpu->memory[cpu->PC]| cpu->memory[cpu->PC + 2];
-
-    uint16_t current_instruction = cpu->memory[cpu->PC] <<8 | cpu->memory[cpu->PC + 2];
+    uint16_t current_instruction = cpu->memory[cpu->PC] <<8 | cpu->memory[cpu->PC + 1];
+    cpu->PC += 2;
     // opcode
     uint8_t opcode = (current_instruction & 0xF000) >> 12;
 
