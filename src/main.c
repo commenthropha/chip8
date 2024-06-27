@@ -49,6 +49,9 @@ int main(int argc, char **argv) {
     // Initialise the screen
     initialise_screen(&window, &renderer, &texture);
 
+    // set scale
+    SDL_RenderSetScale(renderer, 10, 10);
+
     while (running) {
         while (SDL_PollEvent(&event)) {
             switch (event.type) {
@@ -68,8 +71,9 @@ int main(int argc, char **argv) {
                     break;
             }
         }
-
-        draw_test(window, renderer, texture);
+        cycle(&cpu);
+        update_screen(&cpu, renderer, texture);
+        SDL_Delay(16);
     }
 
     // Clean up
@@ -84,3 +88,4 @@ int main(int argc, char **argv) {
 
     return 0;
 }
+

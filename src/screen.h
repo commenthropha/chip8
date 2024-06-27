@@ -10,5 +10,5 @@
 
 void initialise_screen(SDL_Window **window, SDL_Renderer **renderer, SDL_Texture **texture);
 void draw_test(SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture) ;
-
+void update_screen(struct CPU *cpu, SDL_Renderer *renderer, SDL_Texture *texture);
 #endif

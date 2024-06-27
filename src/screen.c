@@ -1,5 +1,5 @@
 #include "screen.h"
-
+#include "cpu.h"
 /*
  * Initialises the CHIP-8 screen using SDL2
  */
@@ -50,5 +50,25 @@ void draw_test(SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture)
 
     SDL_RenderDrawPoint(renderer, 10, 10);
     SDL_RenderPresent(renderer);
-    SDL_Delay(5000);
+    SDL_Delay(100);
+}
+
+void update_screen(struct CPU *cpu, SDL_Renderer *renderer, SDL_Texture *texture) {
+    // Clear the screen
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+
+    // Draw the screen
+    for (int y = 0; y < SCREEN_HEIGHT; y++) {
+        for (int x = 0; x < SCREEN_WIDTH; x++) {
+            if (cpu->screen[y * SCREEN_WIDTH + x] == 1) {
+                SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+                SDL_RenderDrawPoint(renderer, x, y);
+            } 
+            
+        }
+    }
+
+    // Update the screen
+    SDL_RenderPresent(renderer);
 }
