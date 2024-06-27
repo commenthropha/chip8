@@ -121,7 +121,7 @@ void cycle(struct CPU *cpu, SDL_Renderer *renderer) {
                     // get pixel from sprite byte with &, for each column
                     uint8_t pixel = sprite_row & (0x80 >> col); 
                     if (pixel){
-                        if (cpu->screen[y + row][x + col]){
+                        if (cpu->screen[(y + row)*32+x + col]){
                             cpu->registers[0xF] = 1;
                         }
                         // create buffer to draw to screen
