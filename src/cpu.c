@@ -54,14 +54,15 @@ void cycle(struct CPU *cpu) {
     // Fetch the current instruction
     uint16_t current_instruction = cpu->memory[cpu->PC]| cpu->memory[cpu->PC + 2];
 
+    uint16_t current_instruction = cpu->memory[cpu->PC] <<8 | cpu->memory[cpu->PC + 2];
     // opcode
     uint8_t opcode = (current_instruction & 0xF000) >> 12;
 
-    // register address 1
+    // register address 1, X
     uint8_t reg_1=(current_instruction & 0x0F00) >> 8;
 
 
-    // register address 2
+    // register address 2, Y
     uint8_t reg_2=(current_instruction & 0x00F0) >> 4;
 
     // 4 bit number
@@ -109,6 +110,12 @@ void cycle(struct CPU *cpu) {
             break;
         
 
+        // 3XNN skip next instruction iff X == NN
+
+        // 4XNN skip next instruction iff X != NN
+
+        // 5XY0 skip next instruction iff X == Y
+
         // 6XNN set register X to NN
         case 0x6:
             cpu->registers[reg_1] = num_8_bit;
@@ -118,6 +125,8 @@ void cycle(struct CPU *cpu) {
         case 0x7:
             cpu->registers[reg_1] += num_8_bit;
             break;
+
+        // 9XY0 skip next instruction iff X != Y
 
         // ANNN Set I to NNN
         case 0xA:
@@ -148,6 +157,8 @@ void cycle(struct CPU *cpu) {
                 }
             }
             break;
+
+        
     }
         
 
