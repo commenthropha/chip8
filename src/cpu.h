@@ -6,6 +6,7 @@ struct CPU {
     uint8_t *memory;
     uint8_t *registers;
     uint8_t *stack;
+	uint8_t *screen;
     int I; // Index Register
     int DT; // Delay Timer
     int ST; // Sound Timer
