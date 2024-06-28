@@ -144,13 +144,13 @@ void cycle(struct CPU *cpu) {
                     // get pixel from sprite byte with &, for each column
                     uint8_t pixel = sprite_row & (0x80 >> col); 
                     if (pixel){
-                        if (cpu->screen[(y + row)*32+x + col]){
+                        if (cpu->screen[(y + row)*64+x + col]){
                             cpu->registers[0xF] = 1;
                         }
                         // create buffer to draw to screen
                         if (x + col < 64 && y + row < 32){
                         // pixels on screen are flipped if 1 present in sprite byte
-                        cpu->screen[(y + row)*32+x + col] ^= 1;
+                        cpu->screen[(y + row)*64+x + col] ^= 1;
                         }
                     }
                 }
