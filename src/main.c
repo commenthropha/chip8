@@ -72,7 +72,7 @@ int main(int argc, char **argv) {
             }
         }
         cycle(&cpu);
-        update_screen(&cpu, renderer, texture);
+        update_screen(&cpu, renderer);
         SDL_Delay(16);
     }
 

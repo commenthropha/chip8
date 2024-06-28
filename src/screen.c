@@ -38,7 +38,7 @@ void initialise_screen(SDL_Window **window, SDL_Renderer **renderer, SDL_Texture
     SDL_RenderPresent(*renderer);
 }
 
-void draw_test(SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture) {
+void draw_test(SDL_Renderer *renderer) {
     SDL_Rect rect;
     rect.x = 0;
     rect.y = 0;
@@ -53,7 +53,9 @@ void draw_test(SDL_Window *window, SDL_Renderer *renderer, SDL_Texture *texture)
     SDL_Delay(100);
 }
 
-void update_screen(struct CPU *cpu, SDL_Renderer *renderer, SDL_Texture *texture) {
+
+
+void update_screen(struct CPU *cpu, SDL_Renderer *renderer) {
     // Clear the screen
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
     SDL_RenderClear(renderer);
