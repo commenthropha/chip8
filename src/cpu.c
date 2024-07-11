@@ -12,7 +12,12 @@ void initialise_cpu(struct CPU *cpu) {
     cpu->registers = (uint8_t *)malloc(16 * sizeof(uint8_t));
     cpu->stack = (uint8_t *)malloc(16 * sizeof(uint8_t));
     // screen size is 64x32
+
     cpu ->screen = (uint8_t *)malloc(64 * 32 * sizeof(uint8_t)); 
+    // load fontset into memory
+    for (int i = 0; i < 80; i++) {
+        cpu->memory[i] = FONTSET[i];
+    }
     cpu->I = 0;
     cpu->DT = 0;
     cpu->ST = 0;
@@ -108,12 +113,26 @@ void cycle(struct CPU *cpu) {
             cpu->PC = im_address;
             break;
         
-
         // 3XNN skip next instruction iff X == NN
-
+        case 0x3:
+            if (cpu->registers[reg_1] == num_8_bit) {
+                cpu->PC += 2;
+            }
+            break;
+        
         // 4XNN skip next instruction iff X != NN
-
+        case 0x4:
+            if (cpu->registers[reg_1] != num_8_bit) {
+                cpu->PC += 2;
+            }
+            break;
+        
         // 5XY0 skip next instruction iff X == Y
+        case 0x5:
+            if (cpu->registers[reg_1] == cpu->registers[reg_2]) {
+                cpu->PC += 2;
+            }
+            break;
 
         // 6XNN set register X to NN
         case 0x6:
@@ -125,12 +144,95 @@ void cycle(struct CPU *cpu) {
             cpu->registers[reg_1] += num_8_bit;
             break;
 
+        case 0x8:
+            // 8XY0 Set X to Y
+            switch (num_4_bit)
+            {
+            case 0x0:
+                cpu->registers[reg_1] = cpu->registers[reg_2];
+
+                break;
+
+            // 8XY1 Set X to X | Y
+            case 0x1:
+                cpu->registers[reg_1] = cpu->registers[reg_1] | cpu->registers[reg_2];
+                break;
+            
+            // 8XY2 Set X to X & Y
+            case 0x2:
+                cpu->registers[reg_1] = cpu->registers[reg_1] & cpu->registers[reg_2];
+                break;
+
+            // 8XY3 Set X to X ^ Y
+            case 0x3:
+                cpu->registers[reg_1] = cpu->registers[reg_1] ^ cpu->registers[reg_2];
+                break;
+            // 8XY4 Add Y to X, set VF to 1 if carry
+            case 0x4:
+                if (cpu->registers[reg_1] + cpu->registers[reg_2] > 255) {
+                    cpu->registers[0xF] = 1;
+                } else {
+                    cpu->registers[0xF] = 0;
+                }
+                cpu->registers[reg_1] += cpu->registers[reg_2];
+                break;
+            // 8XY5 Subtract Y from X, set, VF to 0 if borrow
+            case 0x5:
+                if (cpu->registers[reg_1] > cpu->registers[reg_2]) {
+                    cpu->registers[0xF] = 1;
+                } else {
+                    cpu->registers[0xF] = 0;
+                }
+                cpu->registers[reg_1] -= cpu->registers[reg_2];
+                break;
+            // 8XY6 Shift X right by 1, set VF to least significant bit of X
+            case 0x6:
+                cpu->registers[0xF] = cpu->registers[reg_1] & 0x1;
+                cpu->registers[reg_1] >>= 1;
+                break;
+            // 8XY7 Set X to Y - X, set VF to 0 if borrow
+            case 0x7:
+                if (cpu->registers[reg_2] > cpu->registers[reg_1]) {
+                    cpu->registers[0xF] = 1;
+                } else {
+                    cpu->registers[0xF] = 0;
+                }
+                cpu->registers[reg_1] = cpu->registers[reg_2] - cpu->registers[reg_1];
+                break;
+            // 8XYE Shift X left by 1, set VF to most significant bit of X
+            case 0xE:
+                cpu->registers[0xF] = cpu->registers[reg_1] >> 7;
+                cpu->registers[reg_1] <<= 1;
+                break;
+    
+            }
+            
+            break;
+
         // 9XY0 skip next instruction iff X != Y
+        case 0x9:
+            if (cpu->registers[reg_1] != cpu->registers[reg_2]) {
+                cpu->PC += 2;
+            }
+            break;
 
         // ANNN Set I to NNN
         case 0xA:
             cpu->I = im_address;
             break;
+
+        // BNNN Jump to address NNN + V0
+        case 0xB:
+            cpu->PC = im_address + cpu->registers[0];
+            break;
+
+        // CXNN Set X to random number & NN
+        case 0xC:
+            cpu->registers[reg_1] = rand() & num_8_bit;
+            break;
+
+        
+
 
         // DXYN draw sprite stored at I at X,Y onto buffer
         case 0xD:
